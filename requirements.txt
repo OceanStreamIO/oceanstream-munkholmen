@@ -1,0 +1,21 @@
+# Environment used for the processing run of 2026-10-03/04:
+# Python 3.12.13, Linux aarch64 (NVIDIA Jetson Orin NX 16 GB, JetPack R36.4.4).
+numpy==2.4.3
+pandas==3.0.1
+xarray==2026.2.0
+dask==2026.3.0
+distributed==2026.3.0
+zarr==3.1.6
+numcodecs==0.16.5
+netCDF4==1.7.4
+flox==0.11.2
+scipy==1.17.1
+bottleneck==1.6.0
+fsspec==2026.3.0
+pyarrow==23.0.1
+matplotlib==3.10.8
+
+# echopype and oceanstream are installed from source, see "Reproducing" in
+# README.md:
+#   echopype     github.com/OceanStreamIO/echopype, branch oceanstream-integration
+#   oceanstream  github.com/OceanStreamIO/oceanstream-cli, branch main

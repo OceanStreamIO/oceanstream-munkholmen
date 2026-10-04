@@ -1,0 +1,35 @@
+# Denoise configuration for the Munkholmen buoy deployment (Trondheim Fjord,
+# April 2026): stationary platform, EK80 WBT Mini, ES38-18|200-18CR, CW,
+# seabed at ~76 m range.
+#
+# The Ryan et al. (2015) open-ocean defaults do not fit a shallow fjord: their
+# attenuation reference layer (400–500 m) and transient-noise start depth
+# (200–250 m) lie below the seabed here. The filters below keep the same
+# sequence but use reference layers inside the 0–70 m water column.
+#
+# Missing frequency sections inherit from [38000] at runtime.
+
+[echodata]
+sonar_model = "EK80"
+campaign_id = "MUNKHOLMEN_2026"
+
+[echodata.denoise]
+methods = ["impulse", "attenuation", "transient", "background"]
+
+use_frequency_specific = true
+
+# ── 38 kHz — 1.024 ms pulse ─────────────────────────────────────
+[echodata.denoise.frequency_params.38000]
+impulse     = { vertical_bin_size = "2m", ping_lags = [1, 2], threshold_db = 12.0 }
+attenuation = { upper_limit_sl = 30.0, lower_limit_sl = 60.0, num_side_pings = 50, threshold = 10.0 }
+transient   = { exclude_above = 20.0, depth_bin = 5.0, n_pings = 50, thr_dB = 15.0, percentile = 15 }
+background  = { range_window = 30, ping_window = 50, SNR_threshold = "3.0dB", background_noise_max = "-125.0dB" }
+
+# ── 200 kHz — 0.256 ms pulse ────────────────────────────────────
+[echodata.denoise.frequency_params.200000]
+impulse     = { vertical_bin_size = "2m", ping_lags = [1, 2], threshold_db = 12.0 }
+attenuation = { upper_limit_sl = 20.0, lower_limit_sl = 50.0, num_side_pings = 50, threshold = 10.0 }
+transient   = { exclude_above = 20.0, depth_bin = 5.0, n_pings = 50, thr_dB = 15.0, percentile = 15 }
+# The 200 kHz noise floor is high and steps between about -102 and -92 dB re 1 W
+# over minutes, so the cap on the estimated noise sits above that band.
+background  = { range_window = 30, ping_window = 50, SNR_threshold = "3.0dB", background_noise_max = "-85.0dB" }

@@ -1,0 +1,42 @@
+{
+  "2026-04-10": {
+    "temperature": 6.944,
+    "salinity": 28.769,
+    "pressure": 37.4,
+    "pH": 8.0,
+    "temperature_source": "ADCP daily mean (2026-04-10)",
+    "salinity_source": "CTD mean, 2026-04-13 06:22\u201310:49 UTC, ~1.1 dbar"
+  },
+  "2026-04-11": {
+    "temperature": 6.878,
+    "salinity": 28.769,
+    "pressure": 37.4,
+    "pH": 8.0,
+    "temperature_source": "ADCP daily mean (2026-04-11)",
+    "salinity_source": "CTD mean, 2026-04-13 06:22\u201310:49 UTC, ~1.1 dbar"
+  },
+  "2026-04-12": {
+    "temperature": 6.915,
+    "salinity": 28.769,
+    "pressure": 37.4,
+    "pH": 8.0,
+    "temperature_source": "ADCP daily mean (2026-04-12)",
+    "salinity_source": "CTD mean, 2026-04-13 06:22\u201310:49 UTC, ~1.1 dbar"
+  },
+  "2026-04-13": {
+    "temperature": 7.126,
+    "salinity": 28.769,
+    "pressure": 37.4,
+    "pH": 8.0,
+    "temperature_source": "ADCP daily mean (2026-04-13)",
+    "salinity_source": "CTD mean, 2026-04-13 06:22\u201310:49 UTC, ~1.1 dbar"
+  },
+  "2026-04-14": {
+    "temperature": 7.126,
+    "salinity": 28.769,
+    "pressure": 37.4,
+    "pH": 8.0,
+    "temperature_source": "ADCP daily mean (2026-04-13)",
+    "salinity_source": "CTD mean, 2026-04-13 06:22\u201310:49 UTC, ~1.1 dbar"
+  }
+}

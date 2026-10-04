@@ -1,0 +1,30 @@
+{
+  "upload_type": "dataset",
+  "title": "Munkholmen buoy echosounder (EK80 MVBS), ADCP and CTD dataset, Trondheim Fjord, April 2026",
+  "description": "Mean volume backscattering strength (MVBS) at 38 and 200 kHz from a Simrad EK80 WBT Mini deployed for 3.5 days (2026-04-10 to 2026-04-14) on the SINTEF OceanLab Munkholmen buoy in Trondheim Fjord, Norway, with ADCP currents and echosounder backscatter (Nortek Signature100) and near-surface CTD data (Sea-Bird SBE19plus) from the same period. See README.md in the deposit for contents, processing and known limitations.",
+  "creators": [],
+  "license": "cc-zero",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": [
+    "fisheries acoustics",
+    "echosounder",
+    "EK80",
+    "MVBS",
+    "volume backscattering strength",
+    "ADCP",
+    "CTD",
+    "Trondheim Fjord",
+    "Munkholmen",
+    "edge computing"
+  ],
+  "dates": [
+    {"type": "Collected", "start": "2026-04-10", "end": "2026-04-14"}
+  ],
+  "locations": [
+    {"place": "SINTEF OceanLab Munkholmen buoy, Trondheim Fjord, Norway", "lat": 63.4575, "lon": 10.3722}
+  ],
+  "grants": [],
+  "notes": "Funded by Akershus fylkeskommune (AFK), project 'Digital Solutions for Automated Monitoring of Seaweed Farm Operations'. R&D partner: SINTEF Ocean. EK80 WBT Mini loaned by NTNU.",
+  "related_identifiers": []
+}
