@@ -115,7 +115,7 @@ The EK80 run script is a thin wrapper around `process_from_raw.py` from the ocea
 - no GPS merge, no NASC and no map tiles, because the platform is stationary;
 - one pulse setting throughout, so there is no combined long- and short-pulse echogram.
 
-The same days are also set up in the OceanStream Denoise Lab, as the survey `munkholmen-2026` with the preset `munkholmen-fjord` (this repository's `munkholmen_denoise.toml`), for trying other denoising parameters on the most representative day, 12 April.
+The same days are also set up in the OceanStream Denoise Lab, as the survey `munkholmen-2026` with the preset `munkholmen-fjord` (this repository's `munkholmen_denoise.toml`), for trying other denoising parameters on the most representative day, 12 April. The survey carries the settings above — the 100 m crop, the range bins, the transducer depth, the measured water properties, no GPS — and starts each run with the seabed mask, the 1 m surface exclusion and the 0.5 m × 10 s MVBS, so a lab run reproduces this processing: Sv the lab computes for a day matches the published `sv/` store exactly.
 
 ## Reproducing
 
