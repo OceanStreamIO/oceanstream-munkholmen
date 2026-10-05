@@ -5,7 +5,7 @@ __pycache__/
 
 # Bulk data products, distributed with the published dataset (checksums in outputs/MANIFEST.csv)
 outputs/**/*.zarr.zip
-outputs/ek80/campaign/*.nc
+outputs/ek80/**/*.nc
 outputs/adcp/munkholmen_adcp_echosounder_sv.nc
 outputs/ctd/munkholmen_ctd_4hz.csv
 outputs/**/*.png

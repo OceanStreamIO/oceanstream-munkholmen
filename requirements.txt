@@ -1,21 +1,34 @@
-# Environment used for the processing run of 2026-10-03/04:
-# Python 3.12.13, Linux aarch64 (NVIDIA Jetson Orin NX 16 GB, JetPack R36.4.4).
-numpy==2.4.3
-pandas==3.0.1
-xarray==2026.2.0
-dask==2026.3.0
-distributed==2026.3.0
-zarr==3.1.6
-numcodecs==0.16.5
+# Environment of the processing run of 2026-10-04 on the OceanStream Denoise
+# Lab worker (EDITO DataLab): Python 3.12.15, Linux x86_64, image
+# oceanstream-echodata:c8032a5 from oceanstream-cli. The first run, on the edge
+# device (Python 3.12.13, Linux aarch64, NVIDIA Jetson Orin NX 16 GB), used
+# numpy 2.4.3, pandas 3.0.1, xarray 2026.2.0, dask 2026.3.0, zarr 3.1.6,
+# numcodecs 0.16.5, fsspec 2026.3.0.
+#
+# xarray 2026.9 and later fail to write the converted EchoData
+# (unexpected "compressor" encoding); stay below it.
+numpy==2.0.2
+pandas==2.3.3
+xarray==2026.7.0
+dask==2026.8.0
+distributed==2026.8.0
+zarr==3.4.0
+numcodecs==0.14.1
 netCDF4==1.7.4
 flox==0.11.2
-scipy==1.17.1
-bottleneck==1.6.0
-fsspec==2026.3.0
-pyarrow==23.0.1
-matplotlib==3.10.8
+scipy==1.18.1
+bottleneck==1.5.0
+fsspec==2025.3.2
+s3fs==2025.3.2
+pyarrow==25.0.1
+matplotlib==3.11.2
+pillow==12.3.0
+
+# Reading the raw data from the Azure file share.
+azure-storage-file-share==12.27.0
+python-dotenv==1.2.4
 
 # echopype and oceanstream are installed from source, see "Reproducing" in
 # README.md:
-#   echopype     github.com/OceanStreamIO/echopype, branch oceanstream-integration
-#   oceanstream  github.com/OceanStreamIO/oceanstream-cli, branch main
+#   echopype     github.com/OceanStreamIO/echopype, branch oceanstream-integration (c93006b3)
+#   oceanstream  github.com/OceanStreamIO/oceanstream-cli, main (c8032a5)
