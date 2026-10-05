@@ -1,0 +1,224 @@
+{
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "id": "MUNKHOLMEN_2026",
+  "title": "Munkholmen buoy echosounder, ADCP and CTD, Trondheim Fjord, April 2026",
+  "description": "Simrad EK80 WBT Mini (38 and 200 kHz CW) on the SINTEF OceanLab Munkholmen buoy, Trondheim Fjord, 10\u201314 April 2026: Sv at the full ping rate, the denoised, seabed-masked and pruned data (stored as masks over the Sv), MVBS and echograms for each day, the whole-deployment MVBS, and the ADCP and CTD products recorded alongside. Processed with the OceanStream batch pipeline; see https://github.com/OceanStreamIO/oceanstream-munkholmen.",
+  "license": "CC0-1.0",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          10.3722,
+          63.4575,
+          10.3722,
+          63.4575
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2026-04-10T11:29:20Z",
+          "2026-04-14T00:25:44.208473Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "oceanstream:frequencies": [
+      38000.0,
+      200000.0
+    ],
+    "oceanstream:days": [
+      "2026-04-10",
+      "2026-04-11",
+      "2026-04-12",
+      "2026-04-13",
+      "2026-04-14"
+    ]
+  },
+  "links": [
+    {
+      "rel": "item",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-10/item.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-11/item.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-12/item.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-13/item.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/item.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "self",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "type": "text/html",
+      "title": "CC0 1.0"
+    }
+  ],
+  "assets": {
+    "campaign_mvbs": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/MUNKHOLMEN_2026/campaign_mvbs_short_pulse.zarr",
+      "type": "application/vnd+zarr",
+      "roles": [
+        "data"
+      ],
+      "title": "MVBS, whole deployment (10 s \u00d7 0.5 m)"
+    },
+    "dataset_readme": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/README.md",
+      "type": "text/markdown",
+      "roles": [
+        "metadata"
+      ],
+      "title": "Dataset description: variables, processing, known limitations"
+    },
+    "dataset_manifest": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/MANIFEST.csv",
+      "type": "text/csv",
+      "roles": [
+        "metadata"
+      ],
+      "title": "Files of the packaged dataset, with sizes and SHA-256"
+    },
+    "campaign_mvbs_netcdf": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/ek80/campaign/campaign_mvbs_short_pulse.nc",
+      "type": "application/x-netcdf",
+      "roles": [
+        "data"
+      ],
+      "title": "MVBS, whole deployment, NetCDF"
+    },
+    "recording_gaps": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/ek80/ek80_recording_gaps.csv",
+      "type": "text/csv",
+      "roles": [
+        "data"
+      ],
+      "title": "Gaps between EK80 pings longer than 5 s"
+    },
+    "adcp_currents": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/adcp/munkholmen_adcp_currents_5min.nc",
+      "type": "application/x-netcdf",
+      "roles": [
+        "data"
+      ],
+      "title": "ADCP currents, ENU, 5-minute averages"
+    },
+    "adcp_echosounder_sv": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/adcp/munkholmen_adcp_echosounder_sv.nc",
+      "type": "application/x-netcdf",
+      "roles": [
+        "data"
+      ],
+      "title": "ADCP echosounder Sv, 70/90/120 kHz"
+    },
+    "ctd_1min": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/ctd/munkholmen_ctd_1min.csv",
+      "type": "text/csv",
+      "roles": [
+        "data"
+      ],
+      "title": "CTD, 1-minute means"
+    },
+    "ctd_4hz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/ctd/munkholmen_ctd_4hz.csv",
+      "type": "text/csv",
+      "roles": [
+        "data"
+      ],
+      "title": "CTD, full rate"
+    },
+    "campaign_echogram_campaign_mvbs_short_pulse_ch0_jet_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/campaign/campaign_mvbs_short_pulse_ch0_jet--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "campaign_echogram_campaign_mvbs_short_pulse_ch0_jet": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/campaign/campaign_mvbs_short_pulse_ch0_jet.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ]
+    },
+    "campaign_echogram_campaign_mvbs_short_pulse_ch0_ocean_r_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/campaign/campaign_mvbs_short_pulse_ch0_ocean_r--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "campaign_echogram_campaign_mvbs_short_pulse_ch0_ocean_r": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/campaign/campaign_mvbs_short_pulse_ch0_ocean_r.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ]
+    },
+    "campaign_echogram_campaign_mvbs_short_pulse_ch1_jet_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/campaign/campaign_mvbs_short_pulse_ch1_jet--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "campaign_echogram_campaign_mvbs_short_pulse_ch1_jet": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/campaign/campaign_mvbs_short_pulse_ch1_jet.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ]
+    },
+    "campaign_echogram_campaign_mvbs_short_pulse_ch1_ocean_r_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/campaign/campaign_mvbs_short_pulse_ch1_ocean_r--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "campaign_echogram_campaign_mvbs_short_pulse_ch1_ocean_r": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/campaign/campaign_mvbs_short_pulse_ch1_ocean_r.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ]
+    }
+  },
+  "keywords": [
+    "fisheries acoustics",
+    "echosounder",
+    "EK80",
+    "MVBS",
+    "ADCP",
+    "CTD",
+    "Trondheim Fjord",
+    "Munkholmen"
+  ]
+}

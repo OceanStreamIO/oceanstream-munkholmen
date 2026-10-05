@@ -1,0 +1,719 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "MUNKHOLMEN_2026_2026-04-14",
+  "collection": "MUNKHOLMEN_2026",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      10.3722,
+      63.4575
+    ]
+  },
+  "properties": {
+    "datetime": null,
+    "start_datetime": "2026-04-14T00:02:50Z",
+    "end_datetime": "2026-04-14T00:25:44.208473Z",
+    "oceanstream:cruise_id": "MUNKHOLMEN_2026",
+    "oceanstream:day": "2026-04-14",
+    "oceanstream:frequencies": [
+      38000.0,
+      200000.0
+    ],
+    "oceanstream:georeferenced": false,
+    "created": "2026-10-05T07:44:12.643408Z",
+    "processing:software": {
+      "echopype": "0.11.1a3.dev130+gc93006b3c"
+    },
+    "processing:level": "L2",
+    "oceanstream:position": "nominal position of the moored buoy"
+  },
+  "assets": {
+    "short_pulse_denoised": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/2026-04-14--short_pulse--denoised.zarr",
+      "type": "application/vnd+zarr",
+      "roles": [
+        "data"
+      ],
+      "title": "short_pulse denoised",
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:product": "denoised",
+      "oceanstream:dims": {
+        "channel": 2,
+        "ping_time": 952,
+        "range_sample": 932
+      },
+      "oceanstream:variables": [
+        "background_noise",
+        "denoise_flags"
+      ]
+    },
+    "short_pulse_masked": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/2026-04-14--short_pulse--masked.zarr",
+      "type": "application/vnd+zarr",
+      "roles": [
+        "data"
+      ],
+      "title": "short_pulse masked",
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:product": "masked",
+      "oceanstream:dims": {
+        "channel": 2,
+        "ping_time": 952,
+        "range_sample": 932
+      },
+      "oceanstream:variables": [
+        "background_noise",
+        "denoise_flags",
+        "seabed_depth"
+      ]
+    },
+    "short_pulse_mvbs_netcdf": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/2026-04-14--short_pulse--mvbs.nc",
+      "type": "application/x-netcdf",
+      "roles": [
+        "data"
+      ],
+      "file:size": 206206,
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:product": "mvbs"
+    },
+    "short_pulse_mvbs": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/2026-04-14--short_pulse--mvbs.zarr",
+      "type": "application/vnd+zarr",
+      "roles": [
+        "data"
+      ],
+      "title": "short_pulse mvbs",
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:product": "mvbs",
+      "oceanstream:dims": {
+        "channel": 2,
+        "ping_time": 137,
+        "depth": 198
+      },
+      "oceanstream:variables": [
+        "Sv"
+      ]
+    },
+    "short_pulse_pruned": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/2026-04-14--short_pulse--pruned.zarr",
+      "type": "application/vnd+zarr",
+      "roles": [
+        "data"
+      ],
+      "title": "short_pulse pruned",
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:product": "pruned",
+      "oceanstream:dims": {
+        "ping_time": 952
+      },
+      "oceanstream:variables": [
+        "keep_ping"
+      ]
+    },
+    "echogram_short_pulse_denoised_ek500_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--ek500_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised_ek500_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--ek500_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised_ek500_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--ek500_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised_ek500_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--ek500_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised_jet_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--jet_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised_jet_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--jet_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised_jet_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--jet_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised_jet_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--jet_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised_ocean-r_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--ocean_r_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised_ocean-r_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--ocean_r_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised_ocean-r_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--ocean_r_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised_ocean-r_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/denoised/2026-04-14--short_pulse--denoised--ocean_r_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_mvbs_ek500_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--ek500_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_mvbs_ek500_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--ek500_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_mvbs_ek500_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--ek500_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_mvbs_ek500_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--ek500_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_mvbs_jet_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--jet_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_mvbs_jet_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--jet_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_mvbs_jet_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--jet_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_mvbs_jet_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--jet_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_mvbs_ocean-r_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--ocean_r_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_mvbs_ocean-r_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--ocean_r_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_mvbs_ocean-r_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--ocean_r_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_mvbs_ocean-r_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/mvbs/2026-04-14--short_pulse--mvbs--ocean_r_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "mvbs",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_ek500_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--ek500_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_ek500_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--ek500_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_ek500_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--ek500_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_ek500_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--ek500_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_jet_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--jet_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_jet_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--jet_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_jet_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--jet_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_jet_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--jet_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_ocean-r_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--ocean_r_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_ocean-r_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--ocean_r_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_ocean-r_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--ocean_r_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_denoised-pruned_ocean-r_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/pruned/2026-04-14--short_pulse--denoised-pruned--ocean_r_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "denoised-pruned",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_raw_ek500_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--ek500_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_raw_ek500_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--ek500_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_raw_ek500_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--ek500_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_raw_ek500_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--ek500_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "ek500",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_raw_jet_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--jet_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_raw_jet_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--jet_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_raw_jet_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--jet_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_raw_jet_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--jet_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "jet",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_raw_ocean-r_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--ocean_r_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_raw_ocean-r_wbt-mini-274022-7-es38-18-200-18cr-es-38-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--ocean_r_WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-7-ES38-18|200-18CR_ES-38-kHz"
+    },
+    "echogram_short_pulse_raw_ocean-r_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz_thumb": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--ocean_r_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz--thumb.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "echogram_short_pulse_raw_ocean-r_wbt-mini-274022-8-es38-18-200-18cr-es-200-khz": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/raw/2026-04-14--short_pulse--ocean_r_WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz.png",
+      "type": "image/png",
+      "roles": [
+        "visual"
+      ],
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:variant": "raw",
+      "oceanstream:colormap": "ocean_r",
+      "oceanstream:channel": "WBT-Mini-274022-8-ES38-18|200-18CR_ES-200-kHz"
+    },
+    "short_pulse_sv": {
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/sv/2026-04-14/2026-04-14--short_pulse.zarr",
+      "type": "application/vnd+zarr",
+      "roles": [
+        "data"
+      ],
+      "title": "short_pulse Sv",
+      "oceanstream:pulse": "short_pulse",
+      "oceanstream:product": "sv",
+      "oceanstream:dims": {
+        "channel": 2,
+        "ping_time": 952,
+        "range_sample": 932,
+        "filenames": 1
+      },
+      "oceanstream:variables": [
+        "Sv",
+        "angle_offset_alongship",
+        "angle_offset_athwartship",
+        "angle_sensitivity_alongship",
+        "angle_sensitivity_athwartship",
+        "beamwidth_alongship",
+        "beamwidth_athwartship",
+        "depth",
+        "echo_range",
+        "equivalent_beam_angle",
+        "formula_absorption",
+        "formula_sound_speed",
+        "frequency_nominal",
+        "gain_correction",
+        "impedance_transceiver",
+        "impedance_transducer",
+        "pH",
+        "pressure",
+        "receiver_sampling_frequency",
+        "sa_correction",
+        "salinity",
+        "sound_absorption",
+        "sound_speed",
+        "source_filenames",
+        "temperature",
+        "water_level"
+      ]
+    }
+  },
+  "links": [
+    {
+      "rel": "collection",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "self",
+      "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/2026-04-14/item.json",
+      "type": "application/geo+json"
+    }
+  ],
+  "bbox": [
+    10.3722,
+    63.4575,
+    10.3722,
+    63.4575
+  ]
+}

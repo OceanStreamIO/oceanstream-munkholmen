@@ -11,6 +11,7 @@ A Simrad EK80 WBT Mini (38 and 200 kHz) pinged from the buoy's moonpool for 3.5 
 | `outputs/` | The small data products, and `MANIFEST.csv` with checksums for every product file |
 | `processing/` | The scripts and configuration that produced them |
 | `metadata/` | The dataset description, the dataset record metadata, and the water properties used for calibration |
+| `stac/` | The STAC catalogue of the products in the bucket, with absolute links so it opens from a clone |
 | `requirements.txt` | Package versions used for the run |
 
 The EK80 MVBS stores, the ADCP echosounder Sv and the full-rate CTD record are not in this repository; they are in the public bucket described below, and `outputs/MANIFEST.csv` lists their checksums. The raw EK80 files (124 GB) are not distributed.
@@ -28,6 +29,9 @@ Everything the run produced is in a public S3 bucket at CloudFerro (Warsaw), rea
 | `products/YYYY-MM-DD/` | The denoised, seabed-masked and pruned Sv, the MVBS (Zarr and NetCDF), and echograms of each stage |
 | `products/MUNKHOLMEN_2026/` | The whole-deployment MVBS (Zarr) |
 | `products/campaign/` | The whole-deployment echograms |
+| `products/collection.json` | The STAC Collection: one Item per day (`products/YYYY-MM-DD/item.json`) listing that day's stores, NetCDF files and echograms, and the whole-deployment and dataset files as Collection assets |
+
+The STAC catalogue starts at `https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json`; any STAC client or [STAC Browser](https://radiantearth.github.io/stac-browser/) can open it. `stac/` in this repository holds the same documents with every link absolute.
 
 The denoised, seabed-masked and pruned stores do not repeat the Sv. They hold what each step removed — one flag bit per filter, the background noise level of every ping, and the pings that pruning kept — and oceanstream rebuilds the Sv from them and the `sv/` store when they are opened (see "Reading the data").
 
@@ -99,6 +103,7 @@ Three things to know before interpreting the data:
 | Echogram previews (≤2000 px), run by the script above | `processing/make_thumbnails.py` |
 | Run the EK80 script on the Denoise Lab's Prefect worker | `processing/submit_to_denoise_lab.py` |
 | Assemble `outputs/` and the dataset | `processing/package_munkholmen_dataset.py` |
+| STAC catalogue, in the bucket and in `stac/` | `processing/publish_stac.py` |
 
 The EK80 run script is a thin wrapper around `process_from_raw.py` from the oceanstream-cli repository. It runs it in the two steps the OceanStream Denoise Lab uses: first the Sv of each day, one process per day, into the `sv` container; then everything from denoising on, which reads that Sv and writes into the `products` container. Raw files are read straight from the file share and deleted once converted. What differs from an open-ocean survey run:
 
@@ -143,9 +148,11 @@ RAW_SOURCE=fileshare FILE_SHARE=sintef-ek80-oceanlab \
 STORAGE_BACKEND=s3 S3_BUCKET=my-bucket S3_PREFIX=munkholmen \
 EXPERIMENT_ROOT=~/data/munkholmen_2026 SV_PARALLEL_DAYS=1 ./run-munkholmen-apr2026.sh
 
-# 6. Package
+# 6. Package, and publish the STAC catalogue
 python package_munkholmen_dataset.py --root ~/data/munkholmen_2026 \
     --products s3://my-bucket/munkholmen/products
+python publish_stac.py --root s3://my-bucket/munkholmen \
+    --public-base https://my-bucket.<endpoint host>/munkholmen --copy ../stac
 ```
 
 With the raw files already on disk, run step 5 with `RAW_SOURCE=local RAW_DIR=~/data/raw/ek80`; with `STORAGE_BACKEND=local` the products go under `EXPERIMENT_ROOT` and step 6 needs no `--products`. `RESUME_STAGE=5` re-runs everything from denoising without touching the Sv. Each day in flight needs 10–16 GB of memory and up to 30 GB of scratch, so raise `SV_PARALLEL_DAYS` only on a host sized for it.

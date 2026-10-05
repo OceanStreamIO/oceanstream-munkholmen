@@ -48,6 +48,7 @@ PROCESSING_FILES = (
     "storage.py",
     "submit_to_denoise_lab.py",
     "package_munkholmen_dataset.py",
+    "publish_stac.py",
 )
 DAY_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 THUMBNAIL_SUFFIX = "--thumb.png"
