@@ -1,4 +1,4 @@
-# OceanStream at Munkholmen, April 2026
+# OceanStream Edge deployment at Munkholmen Ocean Observatory – EK80, ADCP and CTD, Trondheim Fjord, 10–14 April 2026
 
 Processing code, configuration and data products for the echosounder deployment on the SINTEF OceanLab Munkholmen buoy in Trondheim Fjord, 10–14 April 2026.
 
@@ -61,30 +61,27 @@ import xarray as xr
 mvbs = xr.open_dataset("outputs/ek80/campaign/campaign_mvbs_short_pulse.nc")
 sv_38 = mvbs["Sv"].isel(channel=0)   # channel 1 is 200 kHz
 
-# straight from the bucket, without credentials
-import s3fs
-import zarr
-
-fs = s3fs.S3FileSystem(anon=True, endpoint_url="https://s3.waw3-1.cloudferro.com", asynchronous=True)
-
-def open_public(uri):
-    # Zarr does not write chunks that hold only the fill value. The bucket
-    # answers an anonymous request for one of those with 403, not 404, so
-    # read a 403 as "empty" too.
-    store = zarr.storage.FsspecStore(fs, path=uri.removeprefix("s3://"), read_only=True,
-                                     allowed_exceptions=(FileNotFoundError, PermissionError))
-    return xr.open_zarr(store, zarr_format=3)
-
-day = "s3://oceanstream-bucket/munkholmen/products/2026-04-12"
-mvbs_day = open_public(f"{day}/2026-04-12--short_pulse--mvbs.zarr")
+# straight from the bucket, without credentials. zarr_format=3 is needed: the
+# bucket answers 403, not 404, for the Zarr v2 files xarray looks for first.
+base = "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen"
+campaign = xr.open_zarr(f"{base}/products/MUNKHOLMEN_2026/campaign_mvbs_short_pulse.zarr", zarr_format=3)
+mvbs_day = xr.open_zarr(f"{base}/products/2026-04-12/2026-04-12--short_pulse--mvbs.zarr", zarr_format=3)
 
 # the pruned Sv, rebuilt from its masks and the sv/ store (needs oceanstream)
 from oceanstream.echodata.products import resolve_at
-pruned = f"{day}/2026-04-12--short_pulse--pruned.zarr"
+
+S3 = {"anon": True, "client_kwargs": {"endpoint_url": "https://s3.waw3-1.cloudferro.com"}}
+
+def open_public(uri):
+    return xr.open_zarr(uri, zarr_format=3, storage_options=S3)
+
+pruned = "s3://oceanstream-bucket/munkholmen/products/2026-04-12/2026-04-12--short_pulse--pruned.zarr"
 sv = resolve_at(open_public(pruned), pruned, open_public)
 ```
 
 The `dataset/` folder holds plain files (NetCDF, zipped Zarr, CSV, PNG) that download over HTTPS, e.g. `https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/MANIFEST.csv`, or all at once with `aws s3 sync --no-sign-request --endpoint-url https://s3.waw3-1.cloudferro.com --region us-east-1 s3://oceanstream-bucket/munkholmen/dataset/ .` (any region works; the CLI just needs one).
+
+A Zarr store is a folder of many small objects, not one file, so its URL does not download in a browser. Copy one the same way, e.g. `aws s3 sync --no-sign-request --endpoint-url https://s3.waw3-1.cloudferro.com --region us-east-1 s3://oceanstream-bucket/munkholmen/products/MUNKHOLMEN_2026/campaign_mvbs_short_pulse.zarr campaign_mvbs_short_pulse.zarr`; the copy opens with a plain `xr.open_zarr`. In the STAC catalogue every Zarr asset carries `xarray:open_kwargs`, so xarray-aware STAC clients open them correctly.
 
 Three things to know before interpreting the data:
 
@@ -101,6 +98,7 @@ Three things to know before interpreting the data:
 | Table of recording gaps, read from the EK80 `.idx` files | `processing/export_ping_gaps.py` |
 | EK80: raw → Sv, then denoise → seabed mask → prune → MVBS → echograms → whole-deployment MVBS | `processing/run-munkholmen-apr2026.sh` with `processing/munkholmen_denoise.toml` |
 | Echogram previews (≤2000 px), run by the script above | `processing/make_thumbnails.py` |
+| Write the empty chunks Zarr skips, so the public stores read without listing rights; run by the script above | `processing/fill_empty_chunks.py` |
 | Run the EK80 script on the Denoise Lab's Prefect worker | `processing/submit_to_denoise_lab.py` |
 | Assemble `outputs/` and the dataset | `processing/package_munkholmen_dataset.py` |
 | STAC catalogue, in the bucket and in `stac/` | `processing/publish_stac.py` |
@@ -111,11 +109,11 @@ The EK80 run script is a thin wrapper around `process_from_raw.py` from the ocea
 - sound speed and absorption come from the measured temperature (ADCP) and salinity (CTD), not the values entered in the EK80 software;
 - Sv is averaged into 0.106 m range bins and stored as 32-bit floats, so that a full day can be denoised in 16 GB of memory;
 - the denoise reference layers sit inside the 74 m water column;
-- the seabed is detected and masked;
+- the seabed is detected at the leading edge of its echo — the seabed surface — and masked from 0.5 m above it;
 - no GPS merge, no NASC and no map tiles, because the platform is stationary;
 - one pulse setting throughout, so there is no combined long- and short-pulse echogram.
 
-The same days are also set up in the OceanStream Denoise Lab, as the survey `munkholmen-2026` with the preset `munkholmen-fjord` (this repository's `munkholmen_denoise.toml`), for trying other denoising parameters on the most representative day, 12 April. The survey carries the settings above — the 100 m crop, the range bins, the transducer depth, the measured water properties, no GPS — and starts each run with the seabed mask, the 1 m surface exclusion and the 0.5 m × 10 s MVBS, so a lab run reproduces this processing: Sv the lab computes for a day matches the published `sv/` store exactly.
+The same days are also set up in the OceanStream Denoise Lab, as the survey `munkholmen-2026` with the preset `munkholmen-fjord` (this repository's `munkholmen_denoise.toml`), for trying other denoising parameters on the most representative day, 12 April. The survey carries the settings above — the 100 m crop, the range bins, the transducer depth, the measured water properties, no GPS — and starts each run with the seabed mask (leading edge, 0.5 m), the 1 m surface exclusion and the 0.5 m × 10 s MVBS, so a lab run reproduces this processing: Sv the lab computes for a day matches the published `sv/` store exactly.
 
 ## Reproducing
 
@@ -155,9 +153,9 @@ python publish_stac.py --root s3://my-bucket/munkholmen \
     --public-base https://my-bucket.<endpoint host>/munkholmen --copy ../stac
 ```
 
-With the raw files already on disk, run step 5 with `RAW_SOURCE=local RAW_DIR=~/data/raw/ek80`; with `STORAGE_BACKEND=local` the products go under `EXPERIMENT_ROOT` and step 6 needs no `--products`. `RESUME_STAGE=5` re-runs everything from denoising without touching the Sv. Each day in flight needs 10–16 GB of memory and up to 30 GB of scratch, so raise `SV_PARALLEL_DAYS` only on a host sized for it.
+With the raw files already on disk, run step 5 with `RAW_SOURCE=local RAW_DIR=~/data/raw/ek80`; with `STORAGE_BACKEND=local` the products go under `EXPERIMENT_ROOT` and step 6 needs no `--products`. `RESUME_STAGE=5` re-runs everything from denoising without touching the Sv (`submit_to_denoise_lab.py --products-only` on the lab). Each day in flight needs 10–16 GB of memory and up to 30 GB of scratch, so raise `SV_PARALLEL_DAYS` only on a host sized for it.
 
-The published products were made on the Denoise Lab's Prefect worker instead of step 5: `submit_to_denoise_lab.py` packs the run script, the denoise configuration and the water properties into a bundle, uploads it to the lab's `batch/` area and starts the lab's `denoise-lab-batch/batch` deployment, which runs both steps one day at a time with the worker's pipeline and credentials. That run took 6.3 hours, one day at a time on 8 CPUs; the one on the Jetson about 6 hours.
+The published products were made on the Denoise Lab's Prefect worker instead of step 5: `submit_to_denoise_lab.py` packs the run script, the denoise configuration and the water properties into a bundle, uploads it to the lab's `batch/` area and starts the lab's `denoise-lab-batch/batch` deployment, which runs both steps one day at a time with the worker's pipeline and credentials. That run took 6.3 hours, one day at a time on 8 CPUs; the one on the Jetson about 6 hours. On 5 October 2026 the products were made again from the same Sv (`--products-only`, 1.8 hours) to mask the seabed from its leading edge instead of the deepest seabed echo, which had left the edge of the seabed echo visible above the mask in up to 13 % of pings.
 
 ## Licence and credits
 

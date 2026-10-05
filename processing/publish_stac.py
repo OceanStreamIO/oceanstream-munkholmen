@@ -37,7 +37,7 @@ COLLECTION_ID = "MUNKHOLMEN_2026"
 BUOY = [10.3722, 63.4575]  # lon, lat: 63° 27.45' N, 010° 22.33' E
 DAY_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
-TITLE = "Munkholmen buoy echosounder, ADCP and CTD, Trondheim Fjord, April 2026"
+TITLE = "OceanStream Edge deployment at Munkholmen Ocean Observatory – EK80, ADCP and CTD, Trondheim Fjord, 10–14 April 2026"
 DESCRIPTION = (
     "Simrad EK80 WBT Mini (38 and 200 kHz CW) on the SINTEF OceanLab Munkholmen buoy, "
     "Trondheim Fjord, 10–14 April 2026: Sv at the full ping rate, the denoised, seabed-masked "
@@ -67,6 +67,22 @@ COLLECTION_ASSETS = {
                  "CTD, 1-minute means"),
     "ctd_4hz": ("../dataset/ctd/munkholmen_ctd_4hz.csv", "text/csv", ["data"], "CTD, full rate"),
 }
+
+
+XARRAY_ASSETS = "https://stac-extensions.github.io/xarray-assets/v1.0.0/schema.json"
+# The bucket answers 403, not 404, for the Zarr v2 metadata xarray looks for
+# first, so a reader has to be told the stores are Zarr v3.
+ZARR_OPEN_KWARGS = {"engine": "zarr", "zarr_format": 3}
+
+
+def with_open_kwargs(doc: dict) -> dict:
+    """Tell xarray-aware STAC clients how to open each Zarr asset of *doc*."""
+    zarr = [a for a in doc.get("assets", {}).values() if a.get("type") == "application/vnd+zarr"]
+    for asset in zarr:
+        asset["xarray:open_kwargs"] = dict(ZARR_OPEN_KWARGS)
+    if zarr:
+        doc["stac_extensions"] = sorted({*doc.get("stac_extensions", []), XARRAY_ASSETS})
+    return doc
 
 
 def day_item(uri: str, day: str, options: dict, public: str) -> dict:
@@ -122,7 +138,7 @@ def main() -> None:
                   if DAY_RE.match(p.rsplit("/", 1)[-1]))
     items = []
     for day in days:
-        item = day_item(uri, day, options, public)
+        item = with_open_kwargs(day_item(uri, day, options, public))
         write_json(fs, f"{root}/products/{day}/{ITEM_FILENAME}", item)
         print(f"{day}: {len(item['assets'])} assets")
         items.append(item)
@@ -142,6 +158,7 @@ def main() -> None:
         items, COLLECTION_ID, title=TITLE, description=DESCRIPTION, extra_assets=assets,
         self_href=f"{public}/products/{COLLECTION_FILENAME}",
     )
+    with_open_kwargs(collection)
     collection["license"] = "CC0-1.0"
     collection["keywords"] = ["fisheries acoustics", "echosounder", "EK80", "MVBS", "ADCP", "CTD",
                               "Trondheim Fjord", "Munkholmen"]

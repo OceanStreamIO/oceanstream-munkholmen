@@ -15,6 +15,7 @@ The S3 endpoint and keys come from ``AWS_S3_ENDPOINT`` and the usual
 Usage:
   python submit_to_denoise_lab.py --bucket my-bucket \\
       --env-params ~/data/munkholmen_2026/sensors/ek80_env_params.json
+  # add --products-only to redo denoising onwards on the Sv already there
 """
 
 from __future__ import annotations
@@ -35,6 +36,7 @@ BUNDLE_FILES = (
     "run-munkholmen-apr2026.sh",
     "munkholmen_denoise.toml",
     "make_thumbnails.py",
+    "fill_empty_chunks.py",
     "storage.py",
 )
 FLOW, DEPLOYMENT = "denoise-lab-batch", "batch"
@@ -47,6 +49,10 @@ export EXPERIMENT_ROOT="$PWD" ENV_PARAMS_FILE="$PWD/sensors/ek80_env_params.json
 STOP_AFTER_STAGE=4 DASK_MEMORY_LIMIT="$SV_MEMORY" bash processing/run-munkholmen-apr2026.sh
 RESUME_STAGE=5 DASK_MEMORY_LIMIT="$PRODUCTS_MEMORY" bash processing/run-munkholmen-apr2026.sh
 """
+# The products step alone, on the Sv already in S3.
+PRODUCTS_COMMAND = "\n".join(
+    line for line in COMMAND.splitlines() if not line.startswith("STOP_AFTER_STAGE=4")
+) + "\n"
 
 
 def build_bundle(env_params: Path) -> bytes:
@@ -86,6 +92,8 @@ def main() -> None:
     parser.add_argument("--sv-memory", default="8GB", help="Per Dask worker, Sv step")
     parser.add_argument("--products-memory", default="12GB", help="Per Dask worker, products step")
     parser.add_argument("--prefect-api", default=os.environ.get("PREFECT_API_URL", ""))
+    parser.add_argument("--products-only", action="store_true",
+                        help="Rerun only the products step, reading the Sv already in S3")
     parser.add_argument("--dry-run", action="store_true", help="Build the bundle, print the run, submit nothing")
     args = parser.parse_args()
 
@@ -114,7 +122,8 @@ def main() -> None:
         "SV_MEMORY": args.sv_memory,
         "PRODUCTS_MEMORY": args.products_memory,
     }
-    parameters = {"bundle": name, "command": ["bash", "-c", COMMAND], "env": env}
+    command = PRODUCTS_COMMAND if args.products_only else COMMAND
+    parameters = {"bundle": name, "command": ["bash", "-c", command], "env": env}
     if args.dry_run:
         print(f"bundle {name}: {len(bundle)} bytes")
         print(json.dumps(parameters, indent=2))

@@ -25,7 +25,8 @@
 #     200 kHz) so a full day fits in memory on a 16 GB host
 #   * sound speed and absorption come from the measured temperature (ADCP)
 #     and salinity (CTD) instead of the EK80 settings (10 °C, 35 PSU)
-#   * the seabed is detected and masked before MVBS
+#   * the seabed (the leading edge of its echo) is detected and masked
+#     before MVBS
 #   * denoise reference layers sit inside the water column
 #     (munkholmen_denoise.toml)
 #
@@ -113,9 +114,12 @@ ENV_PARAMS_FILE="${ENV_PARAMS_FILE:-$EXPERIMENT_ROOT/sensors/ek80_env_params.jso
 # Transducer face depth below the surface (metres).
 DEPTH_OFFSET="${DEPTH_OFFSET:-0}"
 SURFACE_EXCLUSION_DEPTH="${SURFACE_EXCLUSION_DEPTH:-1}"
-# The composite detector settles ~4–5 m below the onset of the seabed echo
-# (74.7 m); start the mask 6 m above the detection, ~1 m above the onset.
-SEABED_MASK_OFFSET=6
+# The seabed line is the leading edge of the seabed echo, the seabed surface
+# (72.8–74.3 m with the tide), and the mask starts 0.5 m above it so the edge
+# of the echo goes too. The detector's default line, the deepest strong
+# sample, sits 4–6 m lower in the echo's tail and moves with its length.
+SEABED_LINE=edge
+SEABED_MASK_OFFSET=0.5
 MVBS_RANGE_BIN="0.5m"
 MVBS_PING_TIME_BIN="10s"
 SV_CLIP_MAX_DB=-10
@@ -240,6 +244,7 @@ python -u process_from_raw.py \
   --sv-clip-max-db "$SV_CLIP_MAX_DB" \
   --seabed-mask \
   --seabed-mask-offset "$SEABED_MASK_OFFSET" \
+  --seabed-line "$SEABED_LINE" \
   --prune-threshold "$PRUNE_THRESHOLD" \
   --no-crosstalk \
   --mvbs-range-bin "$MVBS_RANGE_BIN" \
@@ -258,4 +263,8 @@ else
   PRODUCTS_ROOT="$EXPERIMENT_ROOT/$PRODUCTS_CONTAINER"
 fi
 python -u "$SCRIPT_DIR/make_thumbnails.py" "$PRODUCTS_ROOT" >>"$LOG_DIR/products.log" 2>&1
+
+# ── step 4: write the chunks Zarr skips, so public readers get no 403 ──
+python -u "$SCRIPT_DIR/fill_empty_chunks.py" "$PRODUCTS_ROOT" "${PRODUCTS_ROOT%/*}/$SV_CONTAINER" \
+  >>"$LOG_DIR/products.log" 2>&1
 echo "done: products in $PRODUCTS_ROOT"

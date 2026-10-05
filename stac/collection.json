@@ -2,7 +2,7 @@
   "type": "Collection",
   "stac_version": "1.0.0",
   "id": "MUNKHOLMEN_2026",
-  "title": "Munkholmen buoy echosounder, ADCP and CTD, Trondheim Fjord, April 2026",
+  "title": "OceanStream Edge deployment at Munkholmen Ocean Observatory \u2013 EK80, ADCP and CTD, Trondheim Fjord, 10\u201314 April 2026",
   "description": "Simrad EK80 WBT Mini (38 and 200 kHz CW) on the SINTEF OceanLab Munkholmen buoy, Trondheim Fjord, 10\u201314 April 2026: Sv at the full ping rate, the denoised, seabed-masked and pruned data (stored as masks over the Sv), MVBS and echograms for each day, the whole-deployment MVBS, and the ADCP and CTD products recorded alongside. Processed with the OceanStream batch pipeline; see https://github.com/OceanStreamIO/oceanstream-munkholmen.",
   "license": "CC0-1.0",
   "extent": {
@@ -88,7 +88,11 @@
       "roles": [
         "data"
       ],
-      "title": "MVBS, whole deployment (10 s \u00d7 0.5 m)"
+      "title": "MVBS, whole deployment (10 s \u00d7 0.5 m)",
+      "xarray:open_kwargs": {
+        "engine": "zarr",
+        "zarr_format": 3
+      }
     },
     "dataset_readme": {
       "href": "https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/dataset/README.md",
@@ -211,6 +215,9 @@
       ]
     }
   },
+  "stac_extensions": [
+    "https://stac-extensions.github.io/xarray-assets/v1.0.0/schema.json"
+  ],
   "keywords": [
     "fisheries acoustics",
     "echosounder",

@@ -1,4 +1,4 @@
-# Munkholmen buoy echosounder, ADCP and CTD dataset, April 2026
+# OceanStream Edge deployment at Munkholmen Ocean Observatory – EK80, ADCP and CTD, Trondheim Fjord, 10–14 April 2026
 
 Mean volume backscattering strength (MVBS) from a Simrad EK80 echosounder deployed for 3.5 days on the SINTEF OceanLab Munkholmen buoy in Trondheim Fjord, Norway, with the currents, echosounder backscatter and near-surface water properties recorded by the buoy's own ADCP and CTD over the same period.
 
@@ -80,7 +80,7 @@ Software: echopype (OceanStream fork) and the OceanStream batch pipeline (`proce
 2. Sv computed from the complex samples. Sound speed and absorption were derived from measured water properties rather than the EK80 settings: temperature from the ADCP (daily mean, 6.9–7.1 °C) and salinity from the CTD (28.8 PSU), giving about 1472 m/s. Both are near-surface measurements applied to the whole water column.
 3. Sv averaged into 0.106 m range bins (3 samples at 38 kHz, 12 at 200 kHz).
 4. Noise removal: impulse noise, attenuated signal, transient noise and background noise (De Robertis and Higginbottom 2007), with reference layers placed inside the water column (`processing/munkholmen_denoise.toml`). Samples louder than −10 dB after noise removal are removed as well.
-5. Seabed detected and masked from about 1 m above the onset of the seabed echo. Pings left with 80 % or more missing samples were dropped.
+5. Seabed detected at the leading edge of the seabed echo, which is the seabed surface (about 73–74 m, moving with the tide), and masked from 0.5 m above it. Pings left with 80 % or more missing samples were dropped.
 6. MVBS computed. The top 1 m is excluded.
 7. Echograms drawn for the Sv, the denoised and the pruned data and the MVBS, in three colour maps (`ocean_r`, `ek500`, `jet`).
 
@@ -100,5 +100,5 @@ In the whole-deployment echograms the time axis is collapsed across gaps longer 
 * **200 kHz noise.** The 200 kHz channel has a high noise floor that steps by about 10 dB over minutes. After background-noise removal, 99 % of the 200 kHz MVBS cells hold data between 1 and 10 m, 34 % between 10 and 30 m and 8 % between 30 m and the seabed. At 38 kHz, 87 % of the cells above the seabed hold data. Diagonal streaks that sweep through the water column over hours, and full-depth vertical stripes after 13 April 11:00, are interference, not biology.
 * **0–12 m.** Both channels show a persistent band of elevated backscatter from the surface to about 12 m, with a sharp lower edge. Its origin has not been established.
 * **False bottom on 10 April.** From about 12:10 to 15:38 on 10 April the echosounder pinged every 0.17 s instead of every 1 s. At that rate the second seabed echo of one ping (about 148 m of travel range) arrives during the next ping, about 21 m after its start. The 38 kHz record for that period shows a band of elevated backscatter between about 15 and 35 m that is consistent with this and is absent afterwards. It should not be read as biology.
-* **Seabed mask.** Where pings are sparse around the power outages the seabed was not always detected, leaving short stretches of seabed echo unmasked.
+* **Seabed mask.** The seabed is found on the 38 kHz channel and the mask starts 0.5 m above it on both channels. At 200 kHz the seabed echo starts about one sample (0.1 m) higher, so in 0.4–1.8 % of 200 kHz pings a strong sample of the seabed echo remains just above the mask. Fish within 0.5 m of the seabed are masked with it.
 * **Position.** The buoy is moored; no GNSS track was recorded. The position above is the nominal buoy position.

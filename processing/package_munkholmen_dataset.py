@@ -45,6 +45,7 @@ PROCESSING_FILES = (
     "process_munkholmen_sensors.py",
     "export_ping_gaps.py",
     "make_thumbnails.py",
+    "fill_empty_chunks.py",
     "storage.py",
     "submit_to_denoise_lab.py",
     "package_munkholmen_dataset.py",
