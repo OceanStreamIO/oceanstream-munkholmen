@@ -9,7 +9,7 @@ Mean volume backscattering strength (MVBS) from a Simrad EK80 echosounder deploy
 | Water depth | about 74 m below the transducer |
 | Authors | _to be completed_ |
 | Licence | CC0 1.0 |
-| Funding | Akershus fylkeskommune (AFK), project "Digital Solutions for Automated Monitoring of Seaweed Farm Operations" |
+| Funding | Akershus fylkeskommune (AFK), project "Digital Solutions for Automated Monitoring of Seaweed Farm Operations" (Pine View Software AS, with SINTEF Ocean AS as R&D supplier) |
 
 All times are UTC.
 
@@ -46,7 +46,7 @@ processing/                                     run script and configuration
 MANIFEST.csv                                    file list with sizes and SHA-256
 ```
 
-The raw EK80 files (124 GB) are not distributed. The full-resolution Sv, the denoising masks and the echograms of every processing stage are not part of this deposit; they are in the public bucket `s3://oceanstream-bucket/munkholmen/` (endpoint `https://s3.waw3-1.cloudferro.com`), under `sv/` and `products/`, which also holds this deposit under `dataset/`.
+The raw EK80 files (124 GB) are not distributed. The full-resolution Sv, the denoising masks and the echograms of every processing stage are not part of this deposit; they are in the public bucket `s3://oceanstream-bucket/munkholmen/` (endpoint `https://s3.waw3-1.cloudferro.com`), under `sv/` and `products/`, which also holds this deposit under `dataset/`. The bucket is catalogued in STAC at `https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json` and browsable at `https://project-oceanstream-766383-0.lab.dive.edito.eu/`. The processing code and the documentation are at `https://github.com/OceanStreamIO/oceanstream-munkholmen`.
 
 ### EK80 MVBS
 
@@ -97,7 +97,7 @@ In the whole-deployment echograms the time axis is collapsed across gaps longer 
 
 ## Known limitations
 
-* **200 kHz noise.** The 200 kHz channel has a high noise floor that steps by about 10 dB over minutes. After background-noise removal, 99 % of the 200 kHz MVBS cells hold data between 1 and 10 m, 34 % between 10 and 30 m and 8 % between 30 m and the seabed. At 38 kHz, 87 % of the cells above the seabed hold data. Diagonal streaks that sweep through the water column over hours, and full-depth vertical stripes after 13 April 11:00, are interference, not biology.
+* **200 kHz noise.** The 200 kHz channel has a high noise floor that steps by about 10 dB over minutes. After background-noise removal, 99 % of the 200 kHz MVBS cells hold data between 1 and 10 m, 34 % between 10 and 30 m and 7 % between 30 m and the seabed, 26 % of the water column in all. At 38 kHz, 88 % of the cells above the seabed hold data. Diagonal streaks that sweep through the water column over hours, and full-depth vertical stripes after 13 April 11:00, are interference, not biology.
 * **0–12 m.** Both channels show a persistent band of elevated backscatter from the surface to about 12 m, with a sharp lower edge. Its origin has not been established.
 * **False bottom on 10 April.** From about 12:10 to 15:38 on 10 April the echosounder pinged every 0.17 s instead of every 1 s. At that rate the second seabed echo of one ping (about 148 m of travel range) arrives during the next ping, about 21 m after its start. The 38 kHz record for that period shows a band of elevated backscatter between about 15 and 35 m that is consistent with this and is absent afterwards. It should not be read as biology.
 * **Seabed mask.** The seabed is found on the 38 kHz channel and the mask starts 0.5 m above it on both channels. At 200 kHz the seabed echo starts about one sample (0.1 m) higher, so in 0.4–1.8 % of 200 kHz pings a strong sample of the seabed echo remains just above the mask. Fish within 0.5 m of the seabed are masked with it.

@@ -7,6 +7,10 @@
 #
 # xarray 2026.9 and later fail to write the converted EchoData
 # (unexpected "compressor" encoding); stay below it.
+#
+# The products were made again on 2026-10-05 (seabed mask from the leading
+# edge of the seabed echo) on image oceanstream-echodata:c42e1f9, with the
+# same package versions.
 numpy==2.0.2
 pandas==2.3.3
 xarray==2026.7.0
@@ -31,4 +35,5 @@ python-dotenv==1.2.4
 # echopype and oceanstream are installed from source, see "Reproducing" in
 # README.md:
 #   echopype     github.com/OceanStreamIO/echopype, branch oceanstream-integration (c93006b3)
-#   oceanstream  github.com/OceanStreamIO/oceanstream-cli, main (c8032a5)
+#   oceanstream  github.com/OceanStreamIO/oceanstream-cli, main (c8032a5; the
+#                products rerun of 2026-10-05 used 3c8b555, image tag c42e1f9, which adds --seabed-line)

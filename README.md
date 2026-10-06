@@ -12,6 +12,7 @@ A Simrad EK80 WBT Mini (38 and 200 kHz) pinged from the buoy's moonpool for 3.5 
 | `processing/` | The scripts and configuration that produced them |
 | `metadata/` | The dataset description, the dataset record metadata, and the water properties used for calibration |
 | `stac/` | The STAC catalogue of the products in the bucket, with absolute links so it opens from a clone |
+| `docs/` | The documentation, as Markdown pages ready for a MkDocs site: getting the data, the products, the processing, the Denoise Lab, the software, and the technical report for the project. Start at `docs/index.md` |
 | `requirements.txt` | Package versions used for the run |
 
 The EK80 MVBS stores, the ADCP echosounder Sv and the full-rate CTD record are not in this repository; they are in the public bucket described below, and `outputs/MANIFEST.csv` lists their checksums. The raw EK80 files (124 GB) are not distributed.
@@ -31,7 +32,9 @@ Everything the run produced is in a public S3 bucket at CloudFerro (Warsaw), rea
 | `products/campaign/` | The whole-deployment echograms |
 | `products/collection.json` | The STAC Collection: one Item per day (`products/YYYY-MM-DD/item.json`) listing that day's stores, NetCDF files and echograms, and the whole-deployment and dataset files as Collection assets |
 
-The STAC catalogue starts at `https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json`; any STAC client or [STAC Browser](https://radiantearth.github.io/stac-browser/) can open it. `stac/` in this repository holds the same documents with every link absolute.
+The STAC catalogue starts at `https://oceanstream-bucket.s3.waw3-1.cloudferro.com/munkholmen/products/collection.json`. A [STAC Browser](https://project-oceanstream-766383-0.lab.dive.edito.eu/) on the EDITO DataLab shows it ready-made, and any STAC client can read it. `stac/` in this repository holds the same documents with every link absolute. In all, `sv/` holds 1.8 GB in 9 500 objects, `products/` 0.6 GB in 9 100, and `dataset/` 0.2 GB in 65 files.
+
+The bucket and the STAC Browser are in the OceanStream project space on the [EDITO DataLab](https://datalab.dive.edito.eu), where the processing ran. The packaged dataset in `dataset/` will also be deposited on Zenodo: `metadata/zenodo.json` holds the record's metadata, and the DOI will be added here once the deposit exists.
 
 The denoised, seabed-masked and pruned stores do not repeat the Sv. They hold what each step removed — one flag bit per filter, the background noise level of every ping, and the pings that pruning kept — and oceanstream rebuilds the Sv from them and the `sv/` store when they are opened (see "Reading the data").
 
@@ -115,6 +118,17 @@ The EK80 run script is a thin wrapper around `process_from_raw.py` from the ocea
 
 The same days are also set up in the OceanStream Denoise Lab, as the survey `munkholmen-2026` with the preset `munkholmen-fjord` (this repository's `munkholmen_denoise.toml`), for trying other denoising parameters on the most representative day, 12 April. The survey carries the settings above — the 100 m crop, the range bins, the transducer depth, the measured water properties, no GPS — and starts each run with the seabed mask (leading edge, 0.5 m), the 1 m surface exclusion and the 0.5 m × 10 s MVBS, so a lab run reproduces this processing: Sv the lab computes for a day matches the published `sv/` store exactly.
 
+## Software
+
+| | |
+|---|---|
+| [oceanstream](https://github.com/OceanStreamIO/oceanstream-cli) | The batch pipeline (`scripts/batch_processing/process_from_raw.py`), the stores of masks over a shared Sv, the seabed detectors and the STAC writer. It is on PyPI as `oceanstream` (0.1.1, January 2026), but that release predates this work — the product stores, the STAC catalogue, the shallow-site options and the leading-edge seabed line came later — so install it from the repository, as in "Reproducing" |
+| [echopype](https://github.com/OceanStreamIO/echopype), branch `oceanstream-integration` | The OceanStream fork of echopype, which converts the raw files and computes Sv |
+| OceanStream Denoise Lab | The web application the products were made with: it runs the pipeline on a Prefect worker, keeps every product in object storage, and shows the echograms of each stage side by side. It runs on the EDITO DataLab and will be released as open source under [OceanStreamIO](https://github.com/OceanStreamIO); it is growing from a tool for tuning the denoising into a web lab for the whole echodata processing chain |
+| [EDITO DataLab](https://datalab.dive.edito.eu) | The platform of the European Digital Twin Ocean, on which the lab, the bucket and the STAC Browser run |
+
+`docs/software.md` says more about each.
+
 ## Reproducing
 
 The run starts from the raw EK80, ADCP and CTD files, which are not part of this repository.
@@ -123,7 +137,9 @@ The run starts from the raw EK80, ADCP and CTD files, which are not part of this
 # 1. Python packages
 pip install -r requirements.txt
 
-# 2. echopype (OceanStream fork) and oceanstream-cli, next to this repository
+# 2. echopype (OceanStream fork) and oceanstream-cli, next to this repository.
+#    The PyPI release of oceanstream is older than this work: use the repository,
+#    which has the --seabed-line option (October 2026) the run script needs.
 git clone -b oceanstream-integration https://github.com/OceanStreamIO/echopype.git
 git clone https://github.com/OceanStreamIO/oceanstream-cli.git oceanstream
 pip install -e ./echopype -e ./oceanstream
@@ -157,8 +173,12 @@ With the raw files already on disk, run step 5 with `RAW_SOURCE=local RAW_DIR=~/
 
 The published products were made on the Denoise Lab's Prefect worker instead of step 5: `submit_to_denoise_lab.py` packs the run script, the denoise configuration and the water properties into a bundle, uploads it to the lab's `batch/` area and starts the lab's `denoise-lab-batch/batch` deployment, which runs both steps one day at a time with the worker's pipeline and credentials. That run took 6.3 hours, one day at a time on 8 CPUs; the one on the Jetson about 6 hours. On 5 October 2026 the products were made again from the same Sv (`--products-only`, 1.8 hours) to mask the seabed from its leading edge instead of the deepest seabed echo, which had left the edge of the seabed echo visible above the mask in up to 13 % of pings.
 
+## Project and funding
+
+This deployment is work package 2 of *Digital Solutions for Automated Monitoring of Seaweed Farm Operations*, a twelve-month project (2026) of Pine View Software AS, the company behind OceanStream, with SINTEF Ocean AS as R&D supplier, co-funded by Akershus fylkeskommune (AFK). The project builds and tests an automated way of monitoring seaweed farms from uncrewed surface vessels and fixed sensors. This work package put an echosounder on the SINTEF OceanLab Munkholmen buoy for five days to produce a benchmark water-column dataset, characterise the platform's noise, and run the OceanStream edge-to-cloud pipeline on real field data. What came out of it, what was learned and what is still open are in [docs/report.md](docs/report.md), written to serve as the technical part of the project report.
+
 ## Licence and credits
 
 The code is released under the MIT licence (see `LICENSE`). The data products in `outputs/` and in the bucket are released under CC0 1.0.
 
-Funded by Akershus fylkeskommune (AFK) through the project *Digital Solutions for Automated Monitoring of Seaweed Farm Operations*, with SINTEF Ocean as R&D partner. The EK80 WBT Mini was loaned by NTNU. Built on [echopype](https://github.com/OSOceanAcoustics/echopype).
+The EK80 WBT Mini was loaned by NTNU. The ADCP and CTD data come from the SINTEF OceanLab Munkholmen observatory. Built on [echopype](https://github.com/OSOceanAcoustics/echopype).
