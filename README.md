@@ -1,4 +1,4 @@
-# OceanStream at Munkholmen, April 2026
+# OceanStream at Munkholmen Observatory, April 2026
 
 Processing code, configuration and data products for the echosounder deployment on the SINTEF OceanLab Munkholmen buoy in Trondheim Fjord, 10–14 April 2026.
 
