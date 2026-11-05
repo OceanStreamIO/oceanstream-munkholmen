@@ -4,6 +4,8 @@ Processing code, configuration and data products for the echosounder deployment 
 
 A Simrad EK80 WBT Mini (38 and 200 kHz) pinged from the buoy's moonpool for 3.5 days while the buoy's own Nortek Signature100 ADCP and Sea-Bird SBE19plus CTD recorded currents and water properties. The raw echosounder data were processed on the edge device that collected them, an NVIDIA Jetson Orin NX with 16 GB of memory, using [echopype](https://github.com/OSOceanAcoustics/echopype) and the [OceanStream](https://github.com/OceanStreamIO/oceanstream-cli) batch pipeline.
 
+<img width="3006" height="1834" alt="munkholmen-edge-to-cloud" src="https://github.com/user-attachments/assets/4ff5556c-69b9-40ab-bb3b-9e884ddad1f0" />
+
 ## Contents
 
 | Path | What it holds |
